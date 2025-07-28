@@ -1,16 +1,18 @@
+"use client"
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Facebook, 
-  Instagram, 
-  Twitter, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Facebook,
+  Instagram,
+  Twitter,
   Linkedin,
   ArrowUp
 } from "lucide-react"
-import { getWhatsAppUrl, getPhoneUrl, scrollToElement } from "@/lib/utils"
+import { getPhoneUrl } from "@/lib/utils"
 
 const quickLinks = [
   { label: "About Us", href: "#about" },
@@ -180,10 +182,9 @@ export default function Footer() {
               <Button
                 onClick={scrollToTop}
                 size="sm"
-                className="bg-blue-600 hover:bg-blue-700 text-white"
+                className="bg-blue-600 hover:bg-blue-700 text-white w-10 h-10 p-0 rounded-full"
               >
-                <ArrowUp className="h-4 w-4 mr-1" />
-                Top
+                <ArrowUp className="h-4 w-4" />
               </Button>
             </div>
           </div>

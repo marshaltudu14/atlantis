@@ -6,8 +6,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+  --font-display: var(--font-cormorant);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -57,9 +58,9 @@
   --primary: oklch(0.25 0.08 240); /* Deep navy blue */
   --primary-foreground: oklch(0.99 0 0);
 
-  /* Secondary: Warm Gold for luxury accent */
-  --secondary: oklch(0.75 0.12 85); /* Warm gold */
-  --secondary-foreground: oklch(0.15 0 0);
+  /* Secondary: Soft blue for interactive elements */
+  --secondary: oklch(0.55 0.15 240); /* Soft blue */
+  --secondary-foreground: oklch(0.99 0 0);
 
   /* Muted: Soft grays for subtle elements */
   --muted: oklch(0.97 0 0); /* Very light gray */
@@ -76,8 +77,8 @@
 
   /* Custom Atlantis Colors */
   --atlantis-navy: oklch(0.25 0.08 240);
-  --atlantis-gold: oklch(0.75 0.12 85);
   --atlantis-blue: oklch(0.55 0.15 240);
+  --atlantis-pearl: oklch(0.95 0.02 240);
   --atlantis-gray-50: oklch(0.98 0 0);
   --atlantis-gray-100: oklch(0.95 0 0);
   --atlantis-gray-200: oklch(0.9 0 0);
@@ -159,8 +160,8 @@
     background: linear-gradient(135deg, var(--atlantis-navy) 0%, var(--atlantis-blue) 100%);
   }
 
-  .bg-gradient-gold {
-    background: linear-gradient(135deg, var(--atlantis-gold) 0%, oklch(0.85 0.08 85) 100%);
+  .bg-gradient-blue {
+    background: linear-gradient(135deg, var(--atlantis-blue) 0%, oklch(0.6 0.12 240) 100%);
   }
 
   /* Text gradients */

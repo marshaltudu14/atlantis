@@ -1,33 +1,8 @@
-import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { Award, Users, Home, Star } from "lucide-react"
+"use client"
 
-const stats = [
-  {
-    icon: Home,
-    value: "500+",
-    label: "Properties Sold",
-    description: "Successfully completed transactions"
-  },
-  {
-    icon: Users,
-    value: "1000+",
-    label: "Happy Families",
-    description: "Satisfied customers across Rourkela"
-  },
-  {
-    icon: Award,
-    value: "15+",
-    label: "Years Experience",
-    description: "Trusted expertise in real estate"
-  },
-  {
-    icon: Star,
-    value: "4.9",
-    label: "Customer Rating",
-    description: "Average rating from our clients"
-  }
-]
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { Award } from "lucide-react"
 
 const values = [
   {
@@ -50,60 +25,78 @@ const values = [
 
 export default function AboutSection() {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-12 lg:py-16 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2">
-            About Atlantis
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Your Trusted Partner in
-            <span className="text-gradient-atlantis block mt-2">Premium Real Estate</span>
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-4">
+            <span className="text-gradient-atlantis">Luxury Redefined</span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            For over 15 years, Atlantis has been the premier choice for luxury real estate in Rourkela, 
-            specializing in waterfront properties and premium homes that define sophisticated living.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-sans">
+            15+ years of excellence in waterfront properties and premium homes.
           </p>
-        </div>
+        </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
+          <motion.div
+            className="space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-                Redefining Luxury Living in Odisha
+              <h3 className="text-2xl sm:text-3xl font-serif font-bold text-gray-900 mb-6">
+                Redefining Luxury Living
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                Atlantis stands at the forefront of Rourkela's real estate landscape, offering an 
-                exclusive portfolio of waterfront villas, modern apartments, and premium bungalows. 
-                Our commitment to excellence has made us the most trusted name in luxury real estate.
+              <p className="text-gray-600 font-sans leading-relaxed mb-6">
+                Atlantis stands at the forefront of Rourkela&apos;s real estate landscape, offering an
+                exclusive portfolio of waterfront villas, modern apartments, and premium bungalows.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                We understand that a home is more than just a property—it's where life's most 
-                precious moments unfold. That's why we go beyond traditional real estate services 
-                to ensure every client finds not just a house, but their perfect sanctuary.
+              <p className="text-gray-600 font-sans leading-relaxed">
+                We understand that a home is more than just a property—it&apos;s where life&apos;s most
+                precious moments unfold.
               </p>
             </div>
 
             {/* Values Grid */}
             <div className="grid sm:grid-cols-2 gap-6">
               {values.map((value, index) => (
-                <div key={index} className="space-y-3">
-                  <h4 className="font-semibold text-gray-900 text-lg">
+                <motion.div
+                  key={index}
+                  className="space-y-3"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <h4 className="font-serif font-semibold text-gray-900 text-lg">
                     {value.title}
                   </h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 font-sans text-sm leading-relaxed">
                     {value.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Image */}
-          <div className="relative">
+          {/* Right Image with Parallax */}
+          <motion.div
+            className="relative"
+            style={{ y: 0 }}
+            whileInView={{ y: [-20, 20] }}
+            transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+            viewport={{ once: false }}
+          >
             <div className="relative rounded-2xl overflow-hidden shadow-atlantis-lg">
               <Image
                 src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2075&q=80"
@@ -114,43 +107,29 @@ export default function AboutSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-            
+
             {/* Floating Stats Card */}
-            <div className="absolute -bottom-8 -left-8 bg-white rounded-xl shadow-atlantis-lg p-6 max-w-xs">
+            <motion.div
+              className="absolute -bottom-8 -left-8 bg-white rounded-xl shadow-atlantis-lg p-6 max-w-xs"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-atlantis rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-royal rounded-lg flex items-center justify-center">
                   <Award className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">15+</p>
-                  <p className="text-sm text-gray-600">Years of Excellence</p>
+                  <p className="text-2xl font-serif font-bold text-gray-900">15+</p>
+                  <p className="text-sm font-sans text-gray-600">Years of Excellence</p>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center group">
-              <div className="w-16 h-16 bg-gradient-atlantis rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-atlantis">
-                <stat.icon className="h-8 w-8 text-white" />
-              </div>
-              <div className="space-y-2">
-                <p className="text-3xl sm:text-4xl font-bold text-gray-900">
-                  {stat.value}
-                </p>
-                <p className="font-semibold text-gray-900">
-                  {stat.label}
-                </p>
-                <p className="text-sm text-gray-600">
-                  {stat.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+
       </div>
     </section>
   )

@@ -27,26 +27,26 @@ interface PropertyCardProps {
 export default function PropertyCard({ property, className }: PropertyCardProps) {
   return (
     <Card className={cn(
-      "group overflow-hidden border-0 shadow-atlantis hover:shadow-atlantis-lg transition-atlantis",
-      "bg-white rounded-2xl",
+      "group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300",
+      "bg-white rounded-3xl",
       className
     )}>
       {/* Image Container */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden rounded-t-3xl">
         <Image
           src={property.image}
           alt={property.title}
           width={400}
           height={300}
-          className="w-full h-64 object-cover group-hover:scale-105 transition-atlantis duration-500"
+          className="w-full h-64 object-cover group-hover:scale-105 transition-all duration-500"
         />
-        
+
         {/* Status Badge */}
-        <Badge 
+        <Badge
           className={cn(
-            "absolute top-4 left-4 font-medium",
-            property.status === "For Sale" 
-              ? "bg-green-500 hover:bg-green-600 text-white" 
+            "absolute top-4 left-4 font-medium rounded-full px-3 py-1",
+            property.status === "For Sale"
+              ? "bg-green-500 hover:bg-green-600 text-white"
               : "bg-blue-500 hover:bg-blue-600 text-white"
           )}
         >
@@ -54,86 +54,84 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         </Badge>
 
         {/* Type Badge */}
-        <Badge 
+        <Badge
           variant="outline"
-          className="absolute top-4 right-4 bg-white/90 text-gray-800 border-white/20"
+          className="absolute top-4 right-4 bg-white/95 text-gray-800 border-white/30 rounded-full px-3 py-1"
         >
           {property.type}
         </Badge>
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-atlantis flex items-center justify-center">
-          <Button 
+        {/* Always Visible Quick Action */}
+        <div className="absolute bottom-4 right-4">
+          <Button
             size="sm"
-            className="bg-white text-gray-900 hover:bg-gray-100"
+            className="bg-white/90 text-gray-900 hover:bg-white rounded-full px-4 py-2 shadow-lg"
           >
             <Eye className="h-4 w-4 mr-2" />
-            View Details
+            View
           </Button>
         </div>
       </div>
 
-      <CardContent className="p-6 space-y-4">
-        {/* Price */}
+      <CardContent className="p-5 space-y-3">
+        {/* Price and Title Row */}
         <div className="flex items-center justify-between">
-          <p className="text-2xl font-bold text-gray-900">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-all">
+            {property.title}
+          </h3>
+          <p className="text-xl font-bold text-blue-600">
             {formatPrice(property.price)}
           </p>
         </div>
 
-        {/* Title */}
-        <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-atlantis">
-          {property.title}
-        </h3>
-
         {/* Location */}
         <div className="flex items-center text-gray-600">
-          <MapPin className="h-4 w-4 mr-2 flex-shrink-0" />
+          <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
           <p className="text-sm">{property.location}</p>
         </div>
 
         {/* Property Details */}
-        <div className="flex items-center justify-between text-gray-600 text-sm">
-          <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-between bg-gray-50 p-2 rounded-xl text-gray-700 text-sm">
+          <div className="flex items-center space-x-3">
             <div className="flex items-center">
-              <Bed className="h-4 w-4 mr-1" />
-              <span>{property.bedrooms} Beds</span>
+              <Bed className="h-4 w-4 mr-1 text-blue-500" />
+              <span>{property.bedrooms}</span>
             </div>
             <div className="flex items-center">
-              <Bath className="h-4 w-4 mr-1" />
-              <span>{property.bathrooms} Baths</span>
+              <Bath className="h-4 w-4 mr-1 text-blue-500" />
+              <span>{property.bathrooms}</span>
             </div>
             <div className="flex items-center">
-              <Square className="h-4 w-4 mr-1" />
+              <Square className="h-4 w-4 mr-1 text-blue-500" />
               <span>{property.area}</span>
             </div>
           </div>
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1 mt-1">
           {property.features.slice(0, 3).map((feature, index) => (
-            <Badge 
+            <Badge
               key={index}
               variant="outline"
-              className="text-xs text-gray-600 border-gray-200"
+              className="text-xs text-gray-600 border-gray-200 rounded-full px-2 py-0"
             >
               {feature}
             </Badge>
           ))}
           {property.features.length > 3 && (
-            <Badge 
+            <Badge
               variant="outline"
-              className="text-xs text-gray-600 border-gray-200"
+              className="text-xs text-gray-600 border-gray-200 rounded-full px-2 py-0"
             >
-              +{property.features.length - 3} more
+              +{property.features.length - 3}
             </Badge>
           )}
         </div>
 
         {/* Action Button */}
-        <Button 
-          className="w-full bg-gradient-atlantis hover:opacity-90 text-white transition-atlantis"
+        <Button
+          className="w-full bg-gradient-atlantis hover:opacity-90 text-white rounded-xl shadow-md"
         >
           View Property
         </Button>

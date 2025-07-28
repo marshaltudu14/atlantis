@@ -1,6 +1,7 @@
 import HeroSection from "@/components/sections/HeroSection"
-import AboutSection from "@/components/sections/AboutSection"
+import MetricsSection from "@/components/sections/MetricsSection"
 import FeaturedProperties from "@/components/sections/FeaturedProperties"
+import AboutSection from "@/components/sections/AboutSection"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
 import ServicesSection from "@/components/sections/ServicesSection"
 import ContactSection from "@/components/sections/ContactSection"
@@ -14,14 +15,19 @@ export default function Home() {
         <HeroSection />
       </section>
 
-      {/* About Section - The Living Room */}
-      <section id="about">
-        <AboutSection />
+      {/* Metrics Section - The Achievements */}
+      <section id="metrics">
+        <MetricsSection />
       </section>
 
       {/* Featured Properties - The Gallery */}
       <section id="properties">
         <FeaturedProperties />
+      </section>
+
+      {/* About Section - The Living Room */}
+      <section id="about">
+        <AboutSection />
       </section>
 
       {/* Testimonials - The Guest Stories */}

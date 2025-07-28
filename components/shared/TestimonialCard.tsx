@@ -23,15 +23,15 @@ interface TestimonialCardProps {
 export default function TestimonialCard({ testimonial, className }: TestimonialCardProps) {
   return (
     <Card className={cn(
-      "group relative overflow-hidden border-0 shadow-atlantis hover:shadow-atlantis-lg transition-atlantis",
-      "bg-white rounded-2xl h-full",
+      "group relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300",
+      "bg-white rounded-3xl h-full",
       className
     )}>
-      <CardContent className="p-8 h-full flex flex-col">
+      <CardContent className="p-6 h-full flex flex-col">
         {/* Quote Icon */}
-        <div className="mb-6">
-          <div className="w-12 h-12 bg-gradient-atlantis rounded-full flex items-center justify-center">
-            <Quote className="h-6 w-6 text-white" />
+        <div className="mb-4">
+          <div className="w-10 h-10 bg-gradient-atlantis rounded-full flex items-center justify-center">
+            <Quote className="h-5 w-5 text-white" />
           </div>
         </div>
 
@@ -54,15 +54,15 @@ export default function TestimonialCard({ testimonial, className }: TestimonialC
         </div>
 
         {/* Testimonial Text */}
-        <blockquote className="text-gray-700 text-lg leading-relaxed mb-6 flex-grow">
-          "{testimonial.text}"
+        <blockquote className="text-gray-700 leading-relaxed mb-4 flex-grow">
+          &quot;{testimonial.text}&quot;
         </blockquote>
 
         {/* Property Badge */}
-        <div className="mb-6">
-          <Badge 
+        <div className="mb-4">
+          <Badge
             variant="outline"
-            className="text-xs text-blue-600 border-blue-200 bg-blue-50"
+            className="text-xs text-blue-600 border-blue-200 bg-blue-50 rounded-full px-3 py-1"
           >
             {testimonial.property}
           </Badge>

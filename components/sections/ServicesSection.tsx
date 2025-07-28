@@ -1,3 +1,6 @@
+"use client"
+
+import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import ServiceCard from "@/components/shared/ServiceCard"
@@ -32,24 +35,34 @@ export default function ServicesSection() {
     <section className="py-20 lg:py-32 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2 font-sans">
             Our Services
           </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Complete Real Estate
-            <span className="text-gradient-atlantis block mt-2">Solutions</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
+            Complete
+            <span className="text-gradient-royal block mt-2">Solutions</span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From finding your dream home to selling your property at the best price, 
-            we provide comprehensive real estate services tailored to your needs.
-          </p>
-        </div>
+        </motion.div>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+          {services.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
+              <ServiceCard service={service} />
+            </motion.div>
           ))}
         </div>
 
@@ -60,7 +73,7 @@ export default function ServicesSection() {
               Why Choose Atlantis?
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We're not just another real estate company. Here's what makes us different.
+              We&apos;re not just another real estate company. Here&apos;s what makes us different.
             </p>
           </div>
 
@@ -115,7 +128,7 @@ export default function ServicesSection() {
             Ready to Get Started?
           </h3>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Let's discuss your real estate needs and find the perfect solution for you.
+            Let&apos;s discuss your real estate needs and find the perfect solution for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 

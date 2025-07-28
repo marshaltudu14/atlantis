@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import TestimonialCard from "@/components/shared/TestimonialCard"
@@ -54,19 +55,21 @@ export default function TestimonialsSection() {
     <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-blue-50/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2">
-            Client Testimonials
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2 font-sans">
+            Client Stories
           </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            What Our Clients
-            <span className="text-gradient-atlantis block mt-2">Say About Us</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
+            Trusted
+            <span className="text-gradient-royal block mt-2">Experiences</span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Don't just take our word for it. Here's what our satisfied clients have to say about 
-            their experience with Atlantis Real Estate.
-          </p>
-        </div>
+        </motion.div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
