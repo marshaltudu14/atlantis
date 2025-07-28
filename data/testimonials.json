@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Ananya Das",
+    "location": "Civil Township, Rourkela",
+    "rating": 5,
+    "text": "Atlantis helped us find our dream home in Civil Township. Their professional approach and deep knowledge of the Rourkela market made the entire process seamless. Highly recommended!",
+    "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
+    "property": "Modern Apartment Complex",
+    "date": "2024-01-15"
+  },
+  {
+    "id": 2,
+    "name": "Bikash Mohanty",
+    "location": "Koel Nagar, Rourkela",
+    "rating": 5,
+    "text": "Exceptional service from the Atlantis team! They understood our requirements perfectly and showed us properties that matched our budget and preferences. The waterfront villa we purchased exceeded our expectations.",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
+    "property": "Luxury Waterfront Villa",
+    "date": "2023-12-08"
+  },
+  {
+    "id": 3,
+    "name": "Smita Patnaik",
+    "location": "Panposh, Rourkela",
+    "rating": 5,
+    "text": "As a first-time homebuyer, I was nervous about the process. Atlantis made everything so easy and transparent. They guided me through every step and helped me secure the perfect bungalow in Panposh.",
+    "avatar": "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
+    "property": "Executive Bungalow",
+    "date": "2024-02-20"
+  },
+  {
+    "id": 4,
+    "name": "Rajesh Kumar Sahoo",
+    "location": "Civil Township, Rourkela",
+    "rating": 5,
+    "text": "Outstanding real estate service! Atlantis not only helped us sell our old property quickly but also found us a beautiful new home. Their market knowledge and negotiation skills are impressive.",
+    "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
+    "property": "Premium Duplex House",
+    "date": "2023-11-12"
+  }
+]

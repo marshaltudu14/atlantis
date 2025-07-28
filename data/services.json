@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Buy Properties",
+    "description": "Find your dream home with our extensive portfolio of premium properties in Rourkela. From luxury villas to modern apartments, we help you discover the perfect space for your family.",
+    "icon": "home",
+    "features": [
+      "Curated property listings",
+      "Market analysis and pricing",
+      "Legal documentation support",
+      "Home loan assistance",
+      "Property inspection services"
+    ],
+    "cta": "Explore Properties"
+  },
+  {
+    "id": 2,
+    "title": "Sell Properties",
+    "description": "Maximize your property's value with our expert selling services. We provide comprehensive market analysis, professional photography, and strategic marketing to ensure the best returns.",
+    "icon": "trending-up",
+    "features": [
+      "Free property valuation",
+      "Professional photography",
+      "Strategic marketing campaigns",
+      "Qualified buyer screening",
+      "Negotiation expertise"
+    ],
+    "cta": "Get Valuation"
+  },
+  {
+    "id": 3,
+    "title": "Rent Properties",
+    "description": "Whether you're looking to rent a property or lease out your space, we provide comprehensive rental services with verified tenants and transparent processes.",
+    "icon": "key",
+    "features": [
+      "Tenant verification",
+      "Rental agreement preparation",
+      "Property maintenance coordination",
+      "Rent collection services",
+      "Legal compliance support"
+    ],
+    "cta": "Find Rentals"
+  }
+]
