@@ -65,7 +65,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         <div className="absolute bottom-4 right-4">
           <Button
             size="sm"
-            className="bg-white/90 text-gray-900 hover:bg-white rounded-full px-4 py-2 shadow-lg"
+            className="bg-white text-gray-900 hover:bg-gray-50 rounded-full px-4 py-2 shadow-lg hover:shadow-xl border border-gray-200 font-semibold transform hover:scale-105 transition-all duration-300"
           >
             <Eye className="h-4 w-4 mr-2" />
             View
@@ -131,7 +131,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
 
         {/* Action Button */}
         <Button
-          className="w-full bg-gradient-atlantis hover:opacity-90 text-white rounded-xl shadow-md"
+          className="w-full bg-gradient-atlantis hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-semibold"
         >
           View Property
         </Button>

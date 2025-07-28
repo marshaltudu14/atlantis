@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import PropertyCard from "@/components/shared/PropertyCard"
 import { Grid, List, ArrowRight } from "lucide-react"
@@ -48,9 +47,6 @@ export default function FeaturedProperties() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2 font-sans">
-            Featured Properties
-          </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
             <span className="text-gradient-atlantis">Curated Collection</span>
           </h2>
@@ -63,24 +59,33 @@ export default function FeaturedProperties() {
         <div className="flex flex-col lg:flex-row justify-between items-center mb-8 gap-4">
           {/* Filter Buttons */}
           <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-            {filterOptions.map((option) => (
-              <Button
+            {filterOptions.map((option, index) => (
+              <motion.div
                 key={option.value}
-                variant={activeFilter === option.value ? "default" : "outline"}
-                size="sm"
-                onClick={() => {
-                  setActiveFilter(option.value)
-                  setShowAll(false) // Reset to initial display when filter changes
-                }}
-                className={cn(
-                  "transition-atlantis",
-                  activeFilter === option.value
-                    ? "bg-gradient-atlantis text-white"
-                    : "text-gray-600 hover:text-gray-900"
-                )}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {option.label}
-              </Button>
+                <Button
+                  variant={activeFilter === option.value ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => {
+                    setActiveFilter(option.value)
+                    setShowAll(false) // Reset to initial display when filter changes
+                  }}
+                  className={cn(
+                    "transition-all duration-300 shadow-sm hover:shadow-md",
+                    activeFilter === option.value
+                      ? "bg-gradient-atlantis text-white"
+                      : "text-gray-600 hover:text-gray-900 hover:border-blue-300"
+                  )}
+                >
+                  {option.label}
+                </Button>
+              </motion.div>
             ))}
           </div>
 
@@ -152,7 +157,7 @@ export default function FeaturedProperties() {
             <Button
               onClick={() => setShowAll(true)}
               size="lg"
-              className="bg-gradient-royal text-white hover:opacity-90 px-8 py-4 text-lg font-medium transition-atlantis font-sans"
+              className="bg-gradient-atlantis hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-sans"
             >
               View More Properties
               <ArrowRight className="h-5 w-5 ml-2" />

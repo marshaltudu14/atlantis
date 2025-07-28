@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import ServiceCard from "@/components/shared/ServiceCard"
 import { ArrowRight, Shield, Clock, Award, Users } from "lucide-react"
@@ -42,9 +41,6 @@ export default function ServicesSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Badge variant="outline" className="mb-4 text-sm font-medium px-4 py-2 font-sans">
-            Our Services
-          </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-gray-900 mb-6">
             Complete
             <span className="text-gradient-royal block mt-2">Solutions</span>
@@ -131,17 +127,17 @@ export default function ServicesSection() {
             Let&apos;s discuss your real estate needs and find the perfect solution for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            <Button
               size="lg"
-              className="bg-gradient-atlantis hover:opacity-90 text-white px-8 py-4 text-lg font-semibold transition-atlantis"
+              className="bg-gradient-atlantis hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               Schedule Consultation
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
-            <Button 
+            <Button
               variant="outline"
               size="lg"
-              className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-4 text-lg font-semibold transition-atlantis"
+              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
             >
               View Properties
             </Button>

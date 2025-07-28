@@ -63,8 +63,8 @@ export default function ServiceCard({ service, className }: ServiceCardProps) {
         </div>
 
         {/* CTA Button */}
-        <Button 
-          className="w-full bg-gradient-atlantis hover:opacity-90 text-white group-hover:bg-gradient-gold group-hover:text-gray-800 transition-atlantis"
+        <Button
+          className="w-full bg-gradient-atlantis hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 font-semibold"
         >
           {service.cta}
           <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-atlantis" />

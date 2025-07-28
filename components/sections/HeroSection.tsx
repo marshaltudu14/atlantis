@@ -4,7 +4,9 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Search, MapPin, ChevronDown } from "lucide-react"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Search, MapPin, ChevronDown, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const localities = [
@@ -18,20 +20,69 @@ const localities = [
 
 export default function HeroSection() {
   const [selectedLocality, setSelectedLocality] = useState("Koel Nagar")
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isComboboxOpen, setIsComboboxOpen] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    // Ensure video plays immediately when component mounts
-    if (videoRef.current) {
-      videoRef.current.play().catch(console.error)
+    const video = videoRef.current
+    if (!video) return
+
+    // YouTube-like progressive loading - start playing as soon as enough data is available
+    const handleLoadStart = () => {
+      // Video starts loading - no spinner, just let it stream
+      console.log('Video loading started')
+    }
+
+    const handleProgress = () => {
+      // Video is buffering - let it play progressively
+      if (video.buffered.length > 0) {
+        const bufferedEnd = video.buffered.end(video.buffered.length - 1)
+        const duration = video.duration
+        if (duration > 0) {
+          const bufferedPercent = (bufferedEnd / duration) * 100
+          console.log(`Video buffered: ${bufferedPercent.toFixed(1)}%`)
+        }
+      }
+    }
+
+    const handleCanPlay = () => {
+      // Enough data to start playing - similar to YouTube
+      setVideoReady(true)
+      video.play().catch(console.error)
+    }
+
+    const handleWaiting = () => {
+      // Video is waiting for more data - pause until buffered
+      console.log('Video waiting for more data')
+    }
+
+    const handlePlaying = () => {
+      // Video resumed playing after buffering
+      console.log('Video playing')
+    }
+
+    // Add event listeners for progressive loading
+    video.addEventListener('loadstart', handleLoadStart)
+    video.addEventListener('progress', handleProgress)
+    video.addEventListener('canplay', handleCanPlay)
+    video.addEventListener('waiting', handleWaiting)
+    video.addEventListener('playing', handlePlaying)
+
+    return () => {
+      video.removeEventListener('loadstart', handleLoadStart)
+      video.removeEventListener('progress', handleProgress)
+      video.removeEventListener('canplay', handleCanPlay)
+      video.removeEventListener('waiting', handleWaiting)
+      video.removeEventListener('playing', handlePlaying)
     }
   }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      {/* Video Background with Rounded Corners and White Border */}
-      <div className="absolute inset-4 z-0 rounded-3xl overflow-hidden">
+      {/* Video Background with Rounded Corners Only */}
+      <div className="absolute inset-0 z-0 rounded-b-[3rem] overflow-hidden">
+        {/* Progressive Video Loading - YouTube Style */}
         <video
           ref={videoRef}
           autoPlay
@@ -39,11 +90,17 @@ export default function HeroSection() {
           loop
           playsInline
           preload="auto"
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-opacity duration-300 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
         >
           <source src="/hero-section-videeo.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
+        {/* Subtle background for when video is loading */}
+        {!videoReady && (
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-100 to-blue-50" />
+        )}
+
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/30" />
       </div>
@@ -77,14 +134,14 @@ export default function HeroSection() {
 
         {/* Premium Search Bar */}
         <motion.div
-          className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-12 max-w-4xl mx-auto shadow-2xl border border-white/20"
+          className="bg-white/95 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-12 max-w-4xl mx-auto shadow-2xl border border-white/20 relative z-50"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
         >
           <div className="flex flex-col lg:flex-row gap-4 items-end">
             {/* City Input (Fixed to Rourkela) */}
-            <div className="flex-1">
+            <div className="w-full lg:flex-1">
               <label className="block text-sm font-semibold text-gray-700 mb-3 font-sans">
                 City
               </label>
@@ -99,54 +156,67 @@ export default function HeroSection() {
               </div>
             </div>
 
-            {/* Locality Dropdown */}
-            <div className="flex-1">
+            {/* Locality Combobox */}
+            <div className="w-full lg:flex-1">
               <label className="block text-sm font-semibold text-gray-700 mb-3 font-sans">
                 Locality
               </label>
-              <div className="relative">
-                <button
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className={cn(
-                    "w-full px-4 py-3 pl-12 pr-12 text-left bg-gray-50 border border-gray-200 rounded-xl h-12",
-                    "text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-                    "transition-all duration-200 font-sans hover:bg-gray-100"
-                  )}
-                >
-                  <MapPin className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-500 h-5 w-5" />
-                  {selectedLocality}
-                  <ChevronDown className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                </button>
-
-                {isDropdownOpen && (
-                  <motion.div
-                    className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 overflow-hidden"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
+              <Popover open={isComboboxOpen} onOpenChange={setIsComboboxOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={isComboboxOpen}
+                    className={cn(
+                      "w-full px-4 py-3 pl-12 pr-12 text-left bg-gray-50 border border-gray-200 rounded-xl h-12",
+                      "text-gray-800 font-medium hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent",
+                      "transition-all duration-200 font-sans justify-between"
+                    )}
                   >
-                    {localities.map((locality) => (
-                      <button
-                        key={locality}
-                        onClick={() => {
-                          setSelectedLocality(locality)
-                          setIsDropdownOpen(false)
-                        }}
-                        className="w-full px-4 py-3 text-left text-gray-800 hover:bg-blue-50 transition-all duration-200 font-sans font-medium"
-                      >
-                        {locality}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </div>
+                    <div className="flex items-center">
+                      <MapPin className="mr-2 h-5 w-5 text-blue-500" />
+                      {selectedLocality}
+                    </div>
+                    <ChevronDown className="ml-2 h-5 w-5 text-gray-400" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0 z-[9999]" align="start">
+                  <Command>
+                    <CommandInput placeholder="Search locality..." className="h-9" />
+                    <CommandList>
+                      <CommandEmpty>No locality found.</CommandEmpty>
+                      <CommandGroup>
+                        {localities.map((locality) => (
+                          <CommandItem
+                            key={locality}
+                            value={locality}
+                            onSelect={(currentValue) => {
+                              setSelectedLocality(currentValue === selectedLocality ? "" : currentValue)
+                              setIsComboboxOpen(false)
+                            }}
+                            className="font-sans"
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                selectedLocality === locality ? "opacity-100" : "opacity-0"
+                              )}
+                            />
+                            {locality}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             {/* Premium Search Button */}
-            <div className="flex-shrink-0">
+            <div className="w-full lg:w-auto lg:flex-shrink-0 flex justify-center lg:justify-start">
               <Button
                 size="lg"
-                className="bg-gradient-atlantis hover:shadow-lg text-white px-8 py-3 h-12 transition-all duration-300 font-sans font-semibold rounded-xl shadow-lg hover:scale-105"
+                className="bg-gradient-atlantis hover:shadow-lg text-white px-8 py-3 h-12 transition-all duration-300 font-sans font-semibold rounded-xl shadow-lg hover:scale-105 w-full lg:w-auto"
               >
                 <Search className="h-5 w-5 mr-2" />
                 Discover
@@ -155,17 +225,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
-          </div>
-        </motion.div>
+
       </motion.div>
     </section>
   )

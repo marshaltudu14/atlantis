@@ -7,19 +7,23 @@ import { Award } from "lucide-react"
 const values = [
   {
     title: "Luxury Redefined",
-    description: "We specialize in premium waterfront properties and luxury homes that exceed expectations."
+    description: "Premium waterfront properties and luxury homes that exceed expectations.",
+    mobileDescription: "Premium waterfront properties & luxury homes."
   },
   {
     title: "Local Expertise",
-    description: "Deep knowledge of Rourkela's real estate market with insights into the best neighborhoods."
+    description: "Deep knowledge of Rourkela's real estate market with insights into the best neighborhoods.",
+    mobileDescription: "Deep knowledge of Rourkela's best neighborhoods."
   },
   {
     title: "Transparent Process",
-    description: "Complete transparency in all transactions with no hidden costs or surprises."
+    description: "Complete transparency in all transactions with no hidden costs or surprises.",
+    mobileDescription: "Complete transparency, no hidden costs."
   },
   {
     title: "Personalized Service",
-    description: "Tailored solutions that match your unique requirements and lifestyle preferences."
+    description: "Tailored solutions that match your unique requirements and lifestyle preferences.",
+    mobileDescription: "Tailored solutions for your lifestyle."
   }
 ]
 
@@ -61,9 +65,12 @@ export default function AboutSection() {
                 Atlantis stands at the forefront of Rourkela&apos;s real estate landscape, offering an
                 exclusive portfolio of waterfront villas, modern apartments, and premium bungalows.
               </p>
-              <p className="text-gray-600 font-sans leading-relaxed">
+              <p className="text-gray-600 font-sans leading-relaxed hidden sm:block">
                 We understand that a home is more than just a property—it&apos;s where life&apos;s most
                 precious moments unfold.
+              </p>
+              <p className="text-gray-600 font-sans leading-relaxed sm:hidden">
+                Your dream home awaits with Atlantis.
               </p>
             </div>
 
@@ -72,17 +79,24 @@ export default function AboutSection() {
               {values.map((value, index) => (
                 <motion.div
                   key={index}
-                  className="space-y-3"
+                  className="space-y-3 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 group cursor-pointer"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
+                  whileHover={{ scale: 1.02, y: -2 }}
                 >
-                  <h4 className="font-serif font-semibold text-gray-900 text-lg">
+                  <motion.h4
+                    className="font-serif font-semibold text-gray-900 text-lg group-hover:text-blue-600 transition-colors duration-300"
+                    whileHover={{ x: 5 }}
+                  >
                     {value.title}
-                  </h4>
-                  <p className="text-gray-600 font-sans text-sm leading-relaxed">
+                  </motion.h4>
+                  <p className="text-gray-600 font-sans text-sm leading-relaxed hidden sm:block">
                     {value.description}
+                  </p>
+                  <p className="text-gray-600 font-sans text-sm leading-relaxed sm:hidden">
+                    {value.mobileDescription}
                   </p>
                 </motion.div>
               ))}

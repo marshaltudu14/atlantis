@@ -164,6 +164,10 @@
     background: linear-gradient(135deg, var(--atlantis-blue) 0%, oklch(0.6 0.12 240) 100%);
   }
 
+  .bg-gradient-royal {
+    background: linear-gradient(135deg, var(--atlantis-navy) 0%, var(--atlantis-blue) 100%);
+  }
+
   /* Text gradients */
   .text-gradient-atlantis {
     background: linear-gradient(135deg, var(--atlantis-navy) 0%, var(--atlantis-blue) 100%);

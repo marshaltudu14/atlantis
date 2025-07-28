@@ -1,6 +1,5 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   MapPin,
@@ -130,13 +129,12 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-6">Locations We Serve</h4>
             <div className="space-y-2">
               {locations.map((location, index) => (
-                <Badge 
+                <span
                   key={index}
-                  variant="outline" 
-                  className="text-gray-300 border-gray-600 hover:border-gray-400 transition-atlantis mr-2 mb-2"
+                  className="inline-block text-gray-300 border border-gray-600 hover:border-gray-400 transition-atlantis mr-2 mb-2 px-3 py-1 rounded-full text-sm"
                 >
                   {location}
-                </Badge>
+                </span>
               ))}
             </div>
             

@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Star, Quote, MapPin, Calendar } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -58,14 +57,11 @@ export default function TestimonialCard({ testimonial, className }: TestimonialC
           &quot;{testimonial.text}&quot;
         </blockquote>
 
-        {/* Property Badge */}
+        {/* Property Info */}
         <div className="mb-4">
-          <Badge
-            variant="outline"
-            className="text-xs text-blue-600 border-blue-200 bg-blue-50 rounded-full px-3 py-1"
-          >
+          <span className="text-xs text-blue-600 bg-blue-50 rounded-full px-3 py-1 font-medium">
             {testimonial.property}
-          </Badge>
+          </span>
         </div>
 
         {/* Author Info */}
