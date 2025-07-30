@@ -1,4 +1,7 @@
+import Header from "@/components/layout/Header"
+import BottomNavigation from "@/components/layout/BottomNavigation"
 import HeroSection from "@/components/sections/HeroSection"
+import PopularLocalitiesSection from "@/components/sections/PopularLocalitiesSection"
 import MetricsSection from "@/components/sections/MetricsSection"
 import FeaturedProperties from "@/components/sections/FeaturedProperties"
 import AboutSection from "@/components/sections/AboutSection"
@@ -9,10 +12,17 @@ import Footer from "@/components/sections/Footer"
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
+      <Header />
+      <main className="min-h-screen">
       {/* Hero Section - The Grand Entrance */}
       <section id="hero">
         <HeroSection />
+      </section>
+
+      {/* Popular Localities - The Neighborhood Guide */}
+      <section id="localities">
+        <PopularLocalitiesSection />
       </section>
 
       {/* Metrics Section - The Achievements */}
@@ -48,5 +58,7 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </main>
+    <BottomNavigation />
+    </>
   );
 }
