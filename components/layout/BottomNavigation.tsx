@@ -1,15 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { motion } from "framer-motion"
-import { Home, Building2, Info, Wrench, Phone, Search } from "lucide-react"
+import { Home, Building2, Info, Phone, Search } from "lucide-react"
 import { gsap } from "gsap"
 
 const BottomNavigation = () => {
   const [activeSection, setActiveSection] = useState("hero")
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const navItems = [
+  const navItems = useMemo(() => [
     {
       id: "hero",
       name: "Home",
@@ -45,7 +45,7 @@ const BottomNavigation = () => {
       href: "#contact",
       gradient: "from-pink-500 to-pink-600"
     }
-  ]
+  ], [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,7 +76,7 @@ const BottomNavigation = () => {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [navItems])
 
   // GSAP initial page load animation
   useEffect(() => {
@@ -155,7 +155,7 @@ const BottomNavigation = () => {
       <div className="bottom-nav-container bg-white/95 backdrop-blur-lg border-t border-gray-200/50 shadow-2xl" style={{ opacity: isLoaded ? 1 : 0 }}>
         <div className="px-4 py-2">
           <nav className="flex items-center justify-around">
-            {navItems.map((item, index) => {
+            {navItems.map((item) => {
               const Icon = item.icon
               const isActive = activeSection === item.id
               

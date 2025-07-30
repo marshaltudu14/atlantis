@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { useInView } from "framer-motion"
 import { Award, Users, Home, Star } from "lucide-react"
 import { useRef, useEffect, useState } from "react"
 import { gsap } from "gsap"
@@ -37,7 +37,15 @@ const stats = [
 ]
 
 // Clock component with GSAP enhanced animations
-function ClockMetric({ stat, index }: { stat: any; index: number }) {
+interface StatType {
+  icon: React.ComponentType<{ className?: string }>
+  value: number
+  suffix: string
+  label: string
+  description: string
+}
+
+function ClockMetric({ stat, index }: { stat: StatType; index: number }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLDivElement>(null)
   const circleRef = useRef<SVGCircleElement>(null)

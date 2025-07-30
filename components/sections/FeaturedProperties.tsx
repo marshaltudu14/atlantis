@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+
 import PropertyCard from "@/components/shared/PropertyCard"
 import { ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -118,7 +118,7 @@ export default function FeaturedProperties() {
 
         {/* Animated Filter Tabs */}
         <div ref={tabsRef} className="flex flex-wrap justify-center gap-3 mb-12">
-          {filterOptions.map((option, index) => (
+          {filterOptions.map((option) => (
             <motion.button
               key={option.value}
               onClick={() => {
@@ -164,7 +164,7 @@ export default function FeaturedProperties() {
           ref={gridRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
         >
-          {displayedProperties.map((property, index) => (
+          {displayedProperties.map((property) => (
             <motion.div
               key={property.id}
               whileHover={{

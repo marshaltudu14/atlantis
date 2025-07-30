@@ -6,6 +6,124 @@ import { Award, Crown, Shield, Star, Sparkles, CheckCircle, ArrowRight } from "l
 import { useRef, useEffect } from "react"
 import { gsap } from "gsap"
 
+// Value Card Component to fix React hooks issue
+interface ValueCardProps {
+  value: {
+    icon: React.ComponentType<{ className?: string }>
+    title: string
+    description: string
+    gradient: string
+  }
+  index: number
+}
+
+const ValueCard: React.FC<ValueCardProps> = ({ value, index }) => {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const iconRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    const card = cardRef.current
+    const icon = iconRef.current
+    const title = titleRef.current
+
+    if (card && icon && title) {
+      const handleMouseEnter = () => {
+        const tl = gsap.timeline()
+
+        tl.to(card, {
+          scale: 1.05,
+          y: -12,
+          rotationY: 5,
+          duration: 0.4,
+          ease: "power2.out"
+        })
+        .to(icon, {
+          scale: 1.2,
+          rotation: 360,
+          duration: 0.6,
+          ease: "power2.out"
+        }, 0)
+        .to(title, {
+          x: 8,
+          color: "#2563eb",
+          duration: 0.3,
+          ease: "power2.out"
+        }, 0.1)
+      }
+
+      const handleMouseLeave = () => {
+        const tl = gsap.timeline()
+
+        tl.to(card, {
+          scale: 1,
+          y: 0,
+          rotationY: 0,
+          duration: 0.4,
+          ease: "power2.out"
+        })
+        .to(icon, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.4,
+          ease: "power2.out"
+        }, 0)
+        .to(title, {
+          x: 0,
+          color: "#111827",
+          duration: 0.3,
+          ease: "power2.out"
+        }, 0)
+      }
+
+      card.addEventListener('mouseenter', handleMouseEnter)
+      card.addEventListener('mouseleave', handleMouseLeave)
+
+      return () => {
+        card.removeEventListener('mouseenter', handleMouseEnter)
+        card.removeEventListener('mouseleave', handleMouseLeave)
+      }
+    }
+  }, [])
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="relative p-6 rounded-3xl bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer overflow-hidden"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      viewport={{ once: true }}
+    >
+      {/* Background Gradient */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+
+      {/* Icon */}
+      <div
+        ref={iconRef}
+        className={`w-14 h-14 bg-gradient-to-br ${value.gradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg`}
+      >
+        <value.icon className="w-7 h-7 text-white" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <h4 ref={titleRef} className="text-xl font-bold text-gray-900 mb-2 transition-all duration-300">
+          {value.title}
+        </h4>
+        <p className="text-gray-600 leading-relaxed">
+          {value.description}
+        </p>
+      </div>
+
+      {/* Arrow Icon */}
+      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+        <ArrowRight className="w-5 h-5 text-blue-600" />
+      </div>
+    </motion.div>
+  )
+}
+
 const values = [
   {
     title: "Luxury Redefined",
@@ -232,121 +350,9 @@ export default function AboutSection() {
 
             {/* Enhanced Values Grid with Advanced GSAP Interactions */}
             <div className="grid sm:grid-cols-2 gap-6 mt-10">
-              {values.map((value, index) => {
-                const cardRef = useRef<HTMLDivElement>(null)
-                const iconRef = useRef<HTMLDivElement>(null)
-                const titleRef = useRef<HTMLHeadingElement>(null)
-
-                useEffect(() => {
-                  const card = cardRef.current
-                  const icon = iconRef.current
-                  const title = titleRef.current
-
-                  if (card && icon && title) {
-                    const handleMouseEnter = () => {
-                      const tl = gsap.timeline()
-
-                      tl.to(card, {
-                        scale: 1.05,
-                        y: -12,
-                        rotationY: 5,
-                        duration: 0.4,
-                        ease: "power2.out"
-                      })
-                      .to(icon, {
-                        scale: 1.2,
-                        rotation: 360,
-                        duration: 0.6,
-                        ease: "power2.out"
-                      }, 0)
-                      .to(title, {
-                        x: 8,
-                        color: "#2563eb",
-                        duration: 0.3,
-                        ease: "power2.out"
-                      }, 0.1)
-                    }
-
-                    const handleMouseLeave = () => {
-                      const tl = gsap.timeline()
-
-                      tl.to(card, {
-                        scale: 1,
-                        y: 0,
-                        rotationY: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                      })
-                      .to(icon, {
-                        scale: 1,
-                        rotation: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                      }, 0)
-                      .to(title, {
-                        x: 0,
-                        color: "#111827",
-                        duration: 0.3,
-                        ease: "power2.out"
-                      }, 0)
-                    }
-
-                    card.addEventListener('mouseenter', handleMouseEnter)
-                    card.addEventListener('mouseleave', handleMouseLeave)
-
-                    return () => {
-                      card.removeEventListener('mouseenter', handleMouseEnter)
-                      card.removeEventListener('mouseleave', handleMouseLeave)
-                    }
-                  }
-                }, [])
-
-                return (
-                  <motion.div
-                    key={index}
-                    ref={cardRef}
-                    className="relative p-6 rounded-3xl bg-white/80 backdrop-blur-sm border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer overflow-hidden"
-                    initial={{ opacity: 0, y: 30, rotationX: 45 }}
-                    whileInView={{ opacity: 1, y: 0, rotationX: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.15 }}
-                    viewport={{ once: true }}
-                  >
-                    {/* Background Gradient */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${value.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-
-                    {/* Icon */}
-                    <div
-                      ref={iconRef}
-                      className={`w-14 h-14 bg-gradient-to-br ${value.gradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg`}
-                    >
-                      <value.icon className="h-7 w-7 text-white" />
-                    </div>
-
-                    {/* Content */}
-                    <h4
-                      ref={titleRef}
-                      className="font-serif font-bold text-gray-900 text-lg mb-3 transition-all duration-300"
-                    >
-                      {value.title}
-                    </h4>
-                    <p className="text-gray-600 font-sans text-sm leading-relaxed hidden sm:block group-hover:text-gray-700 transition-colors duration-300">
-                      {value.description}
-                    </p>
-                    <p className="text-gray-600 font-sans text-sm leading-relaxed sm:hidden group-hover:text-gray-700 transition-colors duration-300">
-                      {value.mobileDescription}
-                    </p>
-
-                    {/* Hover Arrow */}
-                    <motion.div
-                      className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      initial={{ x: -10 }}
-                      whileHover={{ x: 0 }}
-                    >
-                      <ArrowRight className="h-5 w-5 text-blue-600" />
-                    </motion.div>
-                  </motion.div>
-                )
-              })}
+              {values.map((value, index) => (
+                <ValueCard key={index} value={value} index={index} />
+              ))}
             </div>
           </motion.div>
 
